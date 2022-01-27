@@ -1,0 +1,250 @@
+Name,,,Code
+Afghanistan,AF,0,
+Åland Islands,AX,0,
+Albania,AL,1,AL
+Algeria,DZ,1,DZ
+American Samoa,AS,0,
+Andorra,AD,1,AD
+Angola,AO,1,AO
+Anguilla,AI,0,
+Antarctica,AQ,0,
+Antigua and Barbuda,AG,1,AG
+Argentina,AR,1,AR
+Armenia,AM,1,AM
+Aruba,AW,0,
+Australia,AU,1,AU
+Austria,AT,1,AT
+Azerbaijan,AZ,1,AZ
+Bahamas,BS,1,BS
+Bahrain,BH,1,BH
+Bangladesh,BD,1,BD
+Barbados,BB,1,BB
+Belarus,BY,1,BY
+Belgium,BE,1,BE
+Belize,BZ,1,BZ
+Benin,BJ,1,BJ
+Bermuda,BM,0,
+Bhutan,BT,1,BT
+"Bolivia, Plurinational State of",BO,0,
+"Bonaire, Sint Eustatius and Saba",BQ,0,
+Bosnia and Herzegovina,BA,0,
+Botswana,BW,1,BW
+Bouvet Island,BV,0,
+Brazil,BR,1,BR
+British Indian Ocean Territory,IO,0,
+Brunei Darussalam,BN,1,BN
+Bulgaria,BG,1,BG
+Burkina Faso,BF,1,BF
+Burundi,BI,1,BI
+Cambodia,KH,1,KH
+Cameroon,CM,1,CM
+Canada,CA,1,CA
+Cape Verde,CV,1,CV
+Cayman Islands,KY,0,
+Central African Republic,CF,0,
+Chad,TD,1,TD
+Chile,CL,1,CL
+China,CN,0,
+Christmas Island,CX,0,
+Cocos (Keeling) Islands,CC,0,
+Colombia,CO,1,CO
+Comoros,KM,1,KM
+Congo,CG,0,
+"Congo, the Democratic Republic of the",CD,0,
+Cook Islands,CK,0,
+Costa Rica,CR,1,CR
+Côte d'Ivoire,CI,0,
+Croatia,HR,1,HR
+Cuba,CU,0,
+Curaçao,CW,0,
+Cyprus,CY,1,CY
+Czech Republic,CZ,1,CZ
+Denmark,DK,1,DK
+Djibouti,DJ,1,DJ
+Dominica,DM,1,DM
+Dominican Republic,DO,1,DO
+Ecuador,EC,1,EC
+Egypt,EG,1,EG
+El Salvador,SV,1,SV
+Equatorial Guinea,GQ,1,GQ
+Eritrea,ER,0,
+Estonia,EE,1,EE
+Ethiopia,ET,0,
+Falkland Islands (Malvinas),FK,0,
+Faroe Islands,FO,0,
+Fiji,FJ,1,FJ
+Finland,FI,1,FI
+France,FR,1,FR
+French Guiana,GF,0,
+French Polynesia,PF,0,
+French Southern Territories,TF,0,
+Gabon,GA,1,GA
+Gambia,GM,1,GM
+Georgia,GE,1,GE
+Germany,DE,1,DE
+Ghana,GH,1,GH
+Gibraltar,GI,0,
+Greece,GR,1,GR
+Greenland,GL,0,
+Grenada,GD,1,GD
+Guadeloupe,GP,0,
+Guam,GU,0,
+Guatemala,GT,1,GT
+Guernsey,GG,0,
+Guinea,GN,1,GN
+Guinea-Bissau,GW,1,GW
+Guyana,GY,1,GY
+Haiti,HT,1,HT
+Heard Island and McDonald Islands,HM,0,
+Holy See (Vatican City State),VA,0,
+Honduras,HN,1,HN
+Hong Kong,HK,1,HK
+Hungary,HU,1,HU
+Iceland,IS,1,IS
+India,IN,1,IN
+Indonesia,ID,1,ID
+"Iran, Islamic Republic of",IR,0,
+Iraq,IQ,0,
+Ireland,IE,1,IE
+Isle of Man,IM,0,
+Israel,IL,1,IL
+Italy,IT,1,IT
+Jamaica,JM,1,JM
+Japan,JP,1,JP
+Jersey,JE,0,
+Jordan,JO,1,JO
+Kazakhstan,KZ,1,KZ
+Kenya,KE,1,KE
+Kiribati,KI,1,KI
+"Korea, Democratic People's Republic of",KP,0,
+"Korea, Republic of",KR,0,
+Kuwait,KW,1,KW
+Kyrgyzstan,KG,1,KG
+Lao People's Democratic Republic,LA,1,LA
+Latvia,LV,1,LV
+Lebanon,LB,1,LB
+Lesotho,LS,1,LS
+Liberia,LR,1,LR
+Libya,LY,0,
+Liechtenstein,LI,1,LI
+Lithuania,LT,1,LT
+Luxembourg,LU,1,LU
+Macao,MO,1,MO
+"Macedonia, the Former Yugoslav Republic of",MK,0,
+Madagascar,MG,1,MG
+Malawi,MW,1,MW
+Malaysia,MY,1,MY
+Maldives,MV,1,MV
+Mali,ML,1,ML
+Malta,MT,1,MT
+Marshall Islands,MH,1,MH
+Martinique,MQ,0,
+Mauritania,MR,1,MR
+Mauritius,MU,1,MU
+Mayotte,YT,0,
+Mexico,MX,1,MX
+"Micronesia, Federated States of",FM,0,
+"Moldova, Republic of",MD,0,
+Monaco,MC,1,MC
+Mongolia,MN,1,MN
+Montenegro,ME,1,ME
+Montserrat,MS,0,
+Morocco,MA,1,MA
+Mozambique,MZ,1,MZ
+Myanmar,MM,0,
+Namibia,NA,1,NA
+Nauru,NR,1,NR
+Nepal,NP,1,NP
+Netherlands,NL,1,NL
+New Caledonia,NC,0,
+New Zealand,NZ,1,NZ
+Nicaragua,NI,1,NI
+Niger,NE,1,NE
+Nigeria,NG,1,NG
+Niue,NU,0,
+Norfolk Island,NF,0,
+Northern Mariana Islands,MP,0,
+Norway,NO,1,NO
+Oman,OM,1,OM
+Pakistan,PK,1,PK
+Palau,PW,1,PW
+"Palestine, State of",PS,0,
+Panama,PA,1,PA
+Papua New Guinea,PG,1,PG
+Paraguay,PY,1,PY
+Peru,PE,1,PE
+Philippines,PH,1,PH
+Pitcairn,PN,0,
+Poland,PL,1,PL
+Portugal,PT,1,PT
+Puerto Rico,PR,0,
+Qatar,QA,1,QA
+Réunion,RE,0,
+Romania,RO,1,RO
+Russian Federation,RU,0,
+Rwanda,RW,1,RW
+Saint Barthélemy,BL,0,
+"Saint Helena, Ascension and Tristan da Cunha",SH,0,
+Saint Kitts and Nevis,KN,0,
+Saint Lucia,LC,0,
+Saint Martin (French part),MF,0,
+Saint Pierre and Miquelon,PM,0,
+Saint Vincent and the Grenadines,VC,0,
+Samoa,WS,1,WS
+San Marino,SM,1,SM
+Sao Tome and Principe,ST,0,
+Saudi Arabia,SA,1,SA
+Senegal,SN,1,SN
+Serbia,RS,1,RS
+Seychelles,SC,1,SC
+Sierra Leone,SL,1,SL
+Singapore,SG,1,SG
+Sint Maarten (Dutch part),SX,0,
+Slovakia,SK,1,SK
+Slovenia,SI,1,SI
+Solomon Islands,SB,1,SB
+Somalia,SO,0,
+South Africa,ZA,1,ZA
+South Georgia and the South Sandwich Islands,GS,0,
+South Sudan,SS,0,
+Spain,ES,1,ES
+Sri Lanka,LK,1,LK
+Sudan,SD,0,
+Suriname,SR,1,SR
+Svalbard and Jan Mayen,SJ,0,
+Swaziland,SZ,0,
+Sweden,SE,1,SE
+Switzerland,CH,1,CH
+Syrian Arab Republic,SY,0,
+"Taiwan, Province of China",TW,0,
+Tajikistan,TJ,0,
+"Tanzania, United Republic of",TZ,0,
+Thailand,TH,1,TH
+Timor-Leste,TL,1,TL
+Togo,TG,1,TG
+Tokelau,TK,0,
+Tonga,TO,1,TO
+Trinidad and Tobago,TT,1,TT
+Tunisia,TN,1,TN
+Turkey,TR,1,TR
+Turkmenistan,TM,0,
+Turks and Caicos Islands,TC,0,
+Tuvalu,TV,1,TV
+Uganda,UG,1,UG
+Ukraine,UA,1,UA
+United Arab Emirates,AE,1,AE
+United Kingdom,GB,1,GB
+United States,US,1,US
+United States Minor Outlying Islands,UM,0,
+Uruguay,UY,1,UY
+Uzbekistan,UZ,1,UZ
+Vanuatu,VU,1,VU
+"Venezuela, Bolivarian Republic of",VE,0,
+Viet Nam,VN,0,
+"Virgin Islands, British",VG,0,
+"Virgin Islands, U.S.",VI,0,
+Wallis and Futuna,WF,0,
+Western Sahara,EH,0,
+Yemen,YE,0,
+Zambia,ZM,1,ZM
+Zimbabwe,ZW,1,ZW
