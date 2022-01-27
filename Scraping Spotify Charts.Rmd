@@ -1,0 +1,232 @@
+---
+title: "Spotify Charts Scraping"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,warning=FALSE,message=FALSE}
+# Libraries
+library(tidyverse)
+library(rvest)
+library(magrittr)
+library(lubridate)
+library(tibble)
+library(data.table)
+```
+
+
+```{r}
+# Getting ISO-3166-alpha-2 country codes from a csv document 
+# filtered by Spotify service area
+getwd()
+code <- read.csv('countrycode.csv')$Code %>% tolower
+code <- code[lapply(code,nchar)>0] 
+code <- na.omit(code)
+code <- append(code,c('global','kr','bo','tw','uy'))
+code
+```
+
+```{r}
+# Function for creating a list of weeks as a component of urls
+create_week_list = function(){
+  count = 0
+  week_list=vector()
+  date_temp = Sys.Date()
+  stop = as.Date('2017-01-01')
+  while (date_temp >= stop){
+    count = count + 1
+    temp = date_temp - 7
+    str_temp <- paste(as.character(temp),'--',as.character(date_temp),sep="")
+    date_temp <- temp
+    week_list[count] = str_temp
+  }
+  return(week_list)
+}
+
+```
+
+
+```{r}
+# Function for creating a list of days as a component of urls
+create_day_list = function(){
+  count = 0
+  day_list=vector()
+  date_temp = Sys.Date()
+  stop = as.Date('2017-01-01')
+  while (date_temp >= stop){
+    count = count + 1
+    temp = date_temp - 1
+    str_temp <- as.character(temp)
+    date_temp <- temp
+    day_list[count] = str_temp
+  }
+
+  return(day_list)
+}
+
+```
+
+
+```{r}
+# Funciton for getting all the urls
+get_all_urls = function(){
+  url_top = vector()
+  url_viral = vector()
+  w = vector()
+  cc = vector()
+  start=vector()
+  stop=vector()
+  count = 0
+  frequency = c('weekly','daily') # weekly/daily
+  
+  for(i in frequency){
+    if (i == 'weekly'){
+      for(j in create_week_list()){
+        for (k in code){
+          count = count + 1
+          url_top[count] = paste('https://spotifycharts.com/regional/',k,'/',i,'/',j,sep="")
+          url_viral[count] = paste('https://spotifycharts.com/viral/',k,'/',i,'/',j,sep="")
+          w[count] = i
+          cc[count] = k
+          start[count]=substr(j,1,10)
+          stop[count]=substr(j,13,22)
+        }
+      }
+    }
+    else{
+      for(j in create_day_list()){
+        for (k in code){
+          count = count + 1
+          url_top[count] = paste('https://spotifycharts.com/regional/',k,'/',i,'/',j,sep="")
+          url_viral[count] = paste('https://spotifycharts.com/viral/',k,'/',i,'/',j,sep="")
+          w[count] = i
+          cc[count] = k
+          start[count]=j
+          stop[count]=j
+        }
+      }
+    }
+  }
+  
+  urls <- cbind(w,cc,start,stop,url_top,url_viral) %>% as.data.frame
+  return(urls)
+}
+
+```
+
+```{r}
+# A table of all url links
+urls = get_all_urls()
+urls %>% tail
+```
+
+
+```{r}
+# Function for scraping chart data from Spotify
+create_chart = function(url){
+  # tryCatch for dealing with urls with no data
+ track <- tryCatch(
+   expr = {
+     url %>% read_html()%>% html_nodes('.chart-table-track') %>% html_text()},
+   error = function(e){
+     return(NA)
+   })
+  # tryCatch for dealing with urls with no data
+  stream <-tryCatch(
+    expr = {
+      url %>% read_html()%>% html_nodes('.chart-table-streams')},
+    error = function(e){
+      return(NA)
+    })
+  # Songs and Artists
+  temp <- str_split(track[2:201],"\n") 
+  temp <- lapply(temp, function(z){trimws(z)})
+  temp <- lapply(temp, function(z){ z[!is.na(z) & z != ""]})
+  temp <- temp[lapply(temp,length)>0]
+  
+  # The page has no data
+  if(sum(unlist(lapply(temp,function(z){length(z)})))==0){
+    chart = NA
+    # the page has data
+    }else if (sum(unlist(lapply(temp,function(z){length(z)})))!=0){
+    # Account for ranks with empty input
+    count = 0
+    for (i in temp){
+      count = count + 1
+      if(length(i)==0){
+        temp[count][lapply(temp,length)>0]
+        temp[count] = c("NA","NA")
+      }
+    }
+    
+    temp <- temp %>% as.data.table %>% transpose
+    n <- length(temp)
+
+    # Streams
+    temp2 <- stream[2:(n+1)] %>% as.character %>% as.data.table
+    # Account for ranks with empty input
+    count = 0
+    for (i in temp2){
+      count = count + 1
+      if(length(i)==0){
+        temp2[count][lapply(temp2,length)>0]
+        temp2[count] = "NA"
+      }
+    }
+    temp2 <- lapply(temp2,function(z){substr(z,33,nchar(z)-5)}) %>% as.data.table
+    # Combine the two data tables
+    chart <- cbind(temp,temp2)
+    colnames(chart) <- c('Song','Artist','Stream')
+    chart$Artist <- str_sub(chart$Artist,3,nchar(chart$Artist))
+  }
+
+  return(chart)
+}
+
+```
+
+```{r}
+# Function for creating a large table of chart info across country, time, etc.
+create_chart_table = function(chart_input,url_type){
+  chart_table <- data.frame()
+  url_no = length(chart_input[,1])
+
+  for (i in 1:url_no){
+    print(paste("Iteration no.",i))
+    chart <- create_chart(as.character(chart_input[i,][url_type]))
+    
+    if (is.na(chart) == FALSE){
+      n <- length(chart[,1])
+      track_info <- do.call("rbind", replicate(n, chart_input[i,1:4], simplify = FALSE))
+      chart_info <- cbind(chart,track_info) 
+      
+      chart_table <- rbind(chart_info,chart_table)
+      row.names(chart_table) <- NULL
+    }
+  }
+  return(chart_table)
+}
+
+
+```
+
+```{r}
+# For now, let's just get weekly data from us
+df <- urls[(urls$w=='daily') & ((urls$cc == 'uy')),]
+df <- df[order(df$cc),]
+
+# and we create its top200 chart
+chart <- create_chart_table(df,'url_top')
+chart %>% tail
+```
+
+
+```{r}
+# Export chart as csv
+getwd()
+write.csv(chart,'chart_uy1721.csv')
+```
+
