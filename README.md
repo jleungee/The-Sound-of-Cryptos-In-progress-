@@ -1,5 +1,7 @@
-# The-Sound-of-Cryptos-(In-progress)-
+# The-Sound-of-Cryptos-(In progress)
+
 Linking Music Data (Spotify) with cryptos
+
 Time period: 2017-2021
 
 ## Scraping Spotify Data
