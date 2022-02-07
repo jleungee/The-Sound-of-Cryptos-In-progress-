@@ -28,17 +28,18 @@ from os import listdir
 from os.path import isfile, join
 
 
-# setting up my Spotify developer credentials
+# Setting up my Spotify developer credentials
+# Use few accounts interchangeabiltiy such that my account api wont be banned
 def sp_setup(count=0):
     if count == 1:
-        client_id = '626b2045073e42c1a89318d103e657a7'
-        client_secret = 'e79214180b9b45c0ba2f11c7f9c09e18'
+        client_id = ################################ use your client id
+        client_secret = ################################ use your client secret
     elif count == 0:
-        client_id = '868fd01f235b4e5ca119cc9cf93ef83c'
-        client_secret = '225a84008acc4f92aeac510e01819b01'
+        client_id = ################################ use your client id
+        client_secret = ################################ use your client secret
     elif count == 2:
-        client_id = 'de036863d78642539641fc14802416f1'
-        client_secret = 'f869f6c89ee94f4781ae196661664318'
+        client_id = ################################ use your client id
+        client_secret = ################################ use your client secret
        
     client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
     sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
