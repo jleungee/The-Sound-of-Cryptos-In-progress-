@@ -9,6 +9,9 @@ Time period: 2017-2021
 - Scraping Spotify Charts (.Rmd file)
 - countrycodes (.csv file)
 
+2. Getting songs' information and audio features through Spotify API
+- Getting spotify info and audio features by using Python (get_spotify_info.py)
+
 ## Scraping Crypto data from Coingecko.com
 1. Getting cryptos data with Market Cap > $1M from coingeckko (get_crypto.py)
 2. Merge all crypto into a large dataframe (clean_crypto.py)
