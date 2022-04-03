@@ -1,0 +1,164 @@
+---
+title: "Untitled"
+author: "ABC Note"
+date: "3/20/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### FEARS Index
+```{r}
+library(gtrendsR)
+library(magrittr)
+library(lubridate)
+```
+```{r}
+# The keywords in the FEARS index list
+fearlist <- c("GOLD PRICES","RECESSION","GOLD PRICE","DEPRESSION","GREAT DEPRESSION",
+            "GOLD","ECONOMY","PRICE OF GOLD","THE DEPRESSION","CRISIS","FRUGAL","GDP",
+            "CHARITY","BANKRUPTCY","UNEMPLOYMENT","INFLATION RATE","BANKRUPT",
+            "THE GREAT DEPRESSION","CAR DONATE","CAPITALIZATION","EXPENSE","DONATION",
+            "SAVINGS","SOCIAL SECURITY CARD","THE CRISIS","DEFAULT","BENEFITS",
+            "UNEMPLOYED","POVERTY","SOCIAL SECURITY OFFICE")
+countrylist <- c('US', 'ES', 'NO', 'HK', 'BE', 'LT', 'CR', 'AU', 
+               'GB', 'PH', 'CO', 'NL', 'HU', 'IT', 'TR',  'SG', 'DO', 'BR',
+               'DK', 'PE', 'NZ', 'FR', 'GR', 'ID', 'AR', 'MY', 'CA', 'JP', 'DE',
+               'IE', 'SE', 'CZ', 'CH', 'MX', 'PT')
+
+
+```
+
+```{r}
+# To get a list of dates for each half year
+start.date <-  as.Date("2016-07-01")
+stop.date <- as.Date("2016-12-31")
+datelist <- NULL
+for (i in 1:11){
+    datelist[i] <- paste(start.date %m+% months(6*(i-1)),
+                         stop.date %m+% months(6*(i-1)))
+}
+
+```
+
+```{r}
+# get a date list of every date
+date <- NULL
+for (i in 1:(stop.date%m+%months(6*10)-start.date)){
+    date[i] <- start.date + (i-1)
+}
+date <- as.Date(date,origin="1970-01-01")
+date <- as.data.frame(date)
+
+
+```
+
+
+```{r}
+# Scraping from google trend
+for (i in 1:length(countrylist)){
+    for (j in 1:length(fearlist)){
+        for (k in 1:length(datelist)){
+            cat("Processing ",k,"/",length(datelist)," dates; ",
+                j,"/",length(fearlist)," words; ",
+                i,"/",length(countrylist)," countries","\n",
+                sep="")
+          tryCatch({
+            temp <- gtrends(
+              keyword = fearlist[j], 
+              geo = countrylist[i],
+              time = datelist[k])$interest_over_time},
+          error = function(e) {Sys.sleep(120)})
+            
+                  
+            if (k == 1){
+                temp_df <- temp
+            }else{
+                temp_df <- rbind(temp_df,temp)
+            }
+            }
+
+        temp_df <- temp_df[c("date","hits")]
+        temp_df$date <- as.Date(temp_df$date)
+        temp_df <- merge(date,temp_df,by="date",all.x=TRUE)
+        if (j == 1){
+            country_temp <- temp_df
+
+        }else{
+            country_temp <- merge(country_temp,temp_df,by="date",all.x=TRUE)
+        }
+        }
+
+    colnames(country_temp) <- c("date",fearlist)
+    if (i == 1){
+        g.df <- country_temp
+        }else{
+        g.df <- rbind(g.df,country_temp)
+    }
+    }
+g.df
+
+```
+
+
+
+### Bitcoin trend
+
+```{r}
+# Get a date of every date
+start.date <- "2018-01-01" %>% as.Date
+stop.date <- "2022-01-01" %>% as.Date
+date <- NULL
+for (i in 1:(stop.date-start.date)){
+    date[i] <- paste((start.date + (i-1)),(start.date + i))
+}
+
+date <- as.data.frame(date)
+```
+
+
+```{r}
+# Scraping google trend of the word "Bitcoin" in the world
+for (i in  1:(length(date[,1]))){
+  print(paste("Processing ",i,"/",length(date[,1]),sep=""))
+  timetemp <- date[i,1]
+  while(TRUE){
+    tryCatch({
+      df <- gtrends(keyword = "Bitcoin", 
+                  time = timetemp)$interest_by_country %>% na.omit
+      count <- 0
+      break},
+      error = function(e){
+        count = count + 1
+        cat("Sleep",600*count,"s","\n")
+        Sys.sleep(600*count)
+      })
+  }
+  df <- subset(df,df$hit != "" & df$hit != "<1")
+  df$Date <- substr(timetemp,1,10) %>% as.Date
+  df <- df[,c("location","hits","Date")]
+  df[,"location"] <- lapply(df[,"location"] , 
+                            function(x) countrycode(x, 
+                                                    origin = 'country.name', 
+                                                    destination = 'iso2c')) %>% unlist                   
+  colnames(df) <- c("country","Bitcoinhits","Date")
+  if (i == 1){
+    bitdf <- df
+  }else{
+    bitdf <- rbind(bitdf, df)
+  }
+}
+
+bitdf
+```
+
+
+
+```{r}
+
+write.csv(bitdf,"C:\\Users\\jeffr\\Desktop\\FINA 4392\\gtrend\\round2\\part1.csv")
+```
+
+
