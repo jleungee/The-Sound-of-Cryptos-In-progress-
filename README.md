@@ -15,3 +15,7 @@ Time period: 2017-2021
 ## Scraping Crypto data from Coingecko.com
 1. Getting cryptos data with Market Cap > $1M from coingeckko (get_crypto.py)
 2. Merge all crypto into a large dataframe (clean_crypto.py)
+
+## Scraping Google Trend Data (gtrend.Rmd)
+1. Get the trends of 30 keywords in the FEARS index for each country (Da, Engelberg, & Gao, 2015)
+2. Get the world Google Trend of the word "Bitcoin"
